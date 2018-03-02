@@ -23,12 +23,12 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 
         try {
             FileOutputStream fileOut =
-                    new FileOutputStream("/tmp/users.ser");
+                    new FileOutputStream("users.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(users);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in /tmp/users.ser");
+            System.out.printf("Serialized data is saved in users.ser");
         } catch (IOException i) {
             i.printStackTrace();
             return false;
