@@ -16,7 +16,7 @@ public UserDaoSerialImpl user = new UserDaoSerialImpl();
     public void saveUserTest () {
 
 
-    User user1 = new User("Jnusz","Biznesy","hasło",null);
+    User user1 = new User("Jnusz","Biznesy","hasło",null,"login");
     List<User> list = new ArrayList<>();
 
     user.saveUser(list);
