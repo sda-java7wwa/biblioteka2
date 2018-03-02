@@ -43,7 +43,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", passwd='" + passwd + '\'' + ", booklist=" + booklist + '}';
+        return "User{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", booklist=" + booklist + ", login='" + login + '\'' + '}';
     }
 
     public String getName() {
