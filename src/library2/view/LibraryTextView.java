@@ -26,6 +26,7 @@ public class LibraryTextView {
             System.out.println("0. Zakończ");
             System.out.println("1. Dodaj użytkownika");
             System.out.println("2. Dodaj ksiazke");
+
             input = scanner.nextInt();
 
             switch (input){
