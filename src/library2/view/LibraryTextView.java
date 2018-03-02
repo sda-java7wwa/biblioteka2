@@ -39,4 +39,11 @@ public class LibraryTextView {
         }while (true);
 
     }
+    private static void operation1(UserService userService){
+        System.out.println("Podaj Imie: ");
+        String name = scanner.next();
+        //User user = new User
+//        clientService.getClientByPESEL(pesel)
+//                .ifPresent(System.out::println);
+    }
 }

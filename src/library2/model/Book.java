@@ -1,8 +1,9 @@
 package library2.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Book {
+public class Book implements Serializable{
     private String author;
     private String title;
     private int year;
