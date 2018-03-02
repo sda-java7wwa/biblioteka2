@@ -20,5 +20,7 @@ public class Main {
         BooksDaoSerialImpl booksDaoSerial = new BooksDaoSerialImpl();
 
         booksDaoSerial.saveBook(bookList);
+
+        System.out.println(booksDaoSerial.getBooks());
     }
 }

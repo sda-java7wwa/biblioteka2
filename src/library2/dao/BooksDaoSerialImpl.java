@@ -2,18 +2,30 @@ package library2.dao;
 
 import library2.model.Book;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class BooksDaoSerialImpl implements BookDao {
+public class BooksDaoSerialImpl implements BookDao, Serializable {
 
 
 
     @Override
     public List<Book> getBooks() {
-        return null;
+        List<Book> bookList = new ArrayList<>();
+        try {
+            FileInputStream fileIn = new FileInputStream("books.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            bookList = (List<Book>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+        }
+        return bookList;
     }
 
     @Override
