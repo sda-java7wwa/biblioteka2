@@ -1,5 +1,6 @@
 package library2.service;
 
+import library2.Exceptions.InvalidLoginException;
 import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
 import library2.model.User;
@@ -22,10 +23,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> logIn(String login) {
-        return userDao.getUsersList()
+    public User logIn(String login) throws InvalidLoginException {
+
+        if(userDao.getUsersList()
                 .stream()
                 .filter(s -> s.getLogin().equals(login))
-                .findFirst();
+                .findFirst()
+                .isPresent()){
+           return userDao.getUsersList()
+                    .stream()
+                    .filter(s -> s.getLogin().equals(login))
+                    .findFirst()
+                    .get();
+
+        } else throw new InvalidLoginException();
     }
 }
