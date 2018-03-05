@@ -100,7 +100,7 @@ public class LibraryTextView {
 
     private static State handleDurningRegistration(Scanner scanner){
 
-        
+
 
 
         return State.INIT;
