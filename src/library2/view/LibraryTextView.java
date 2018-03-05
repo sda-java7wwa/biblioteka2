@@ -90,6 +90,9 @@ public class LibraryTextView {
 /*public class LibraryTextView {
 
     private static Scanner scanner = new Scanner(System.in);
+
+    private static User CurrentUser;
+
     public static void main(String[] args) {
 
         UserService userService = new UserServiceImpl();
@@ -104,14 +107,17 @@ public class LibraryTextView {
             System.out.println("0. Zakończ");
             System.out.println("1. Dodaj użytkownika");
             System.out.println("2. Dodaj ksiazke");
-            System.out.println("3. Zaloguj się");
+            System.out.println("3. Pokaz kto jest zalogowany");
+            System.out.println("4. Zaloguj się");
 
             input = scanner.nextInt();
 
             switch (input){
                 case 0: System.exit(0);
-                case 1: //operation1(clientService); break;
+                case 1: operation1(userService); break;
                 case 2:// operation2(clientService);break;
+                case 3:
+                    System.out.println(CurrentUser.getLogin());
                 default:
                     System.out.println("Niepoprawna operacja"); break;
             }
@@ -134,8 +140,9 @@ public class LibraryTextView {
         }while (checkLogin(login));
         System.out.println("Podaj hasło: ");
         String password = scanner.next();
-
-        userService.addNewUser(new User(name,surname,password,null,login));
+        User user = new User(name,surname,password,null,login);
+        userService.addNewUser(user);
+        CurrentUser = user;
         //User user = new User
 //        clientService.getClientByPESEL(pesel)
 //                .ifPresent(System.out::println);
@@ -148,7 +155,7 @@ public class LibraryTextView {
                 .anyMatch(s -> s.getLogin().equals(login));
     }
 
-    private static boolean operation3(){
+    private static boolean operation4(){
         UserService userService = new UserServiceImpl();
         User user=null;
         do {
@@ -158,13 +165,19 @@ public class LibraryTextView {
                 user = userService.logIn(login);
             } catch (InvalidLoginException e) {
                 System.out.println("Błędny login");
+                return false;
             }
         }while (user!=null);
 
         System.out.println("Podaj haslo: ");
         String password = scanner.next();
-        if(user.getPasswd().equals(password))
-        return true;
+        if(user.getPasswd().equals(password)){
+            CurrentUser = user;
+            return true;
+        } else {
+            System.out.println("Błędne hasło");
+            return false;
+        }
     }
 }
 */
