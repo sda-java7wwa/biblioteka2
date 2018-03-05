@@ -1,21 +1,39 @@
 package library2.dao;
 
+import library2.model.Book;
 import library2.model.User;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoSerialImpl implements UserDao, Serializable{
 
-    List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
+    public List<User> getUsersList(){
+        return users;
+    }
 
     @Override
-    public List<User> getUsers() {
-        return null;
+    public List<User> getUsersData() {
+        try {
+            FileInputStream fileIn = new FileInputStream("users.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            users = (List<User>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+        }
+        return users;
     }
 
 

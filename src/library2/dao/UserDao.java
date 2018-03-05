@@ -4,7 +4,12 @@ import java.util.List;
 
 public interface UserDao {
 
-    List<User> getUsers ();
+    void addUser(User user);
+
+    List<User> getUsersList();
+
+    List<User> getUsersData ();
+
     boolean saveUser(List<User> users);
 
 }
