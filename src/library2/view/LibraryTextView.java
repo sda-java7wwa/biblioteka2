@@ -30,7 +30,8 @@ public class LibraryTextView {
             System.out.println("0. Zakończ");
             System.out.println("1. Dodaj użytkownika");
             System.out.println("2. Dodaj ksiazke");
-            System.out.println("3. Zaloguj się");
+            System.out.println("3. Pokaz kto jest zalogowany");
+            System.out.println("4. Zaloguj się");
 
             input = scanner.nextInt();
 
@@ -38,6 +39,8 @@ public class LibraryTextView {
                 case 0: System.exit(0);
                 case 1: operation1(userService); break;
                 case 2:// operation2(clientService);break;
+                case 3:
+                    System.out.println(CurrentUser.getLogin());
                 default:
                     System.out.println("Niepoprawna operacja"); break;
             }
@@ -60,8 +63,9 @@ public class LibraryTextView {
         }while (checkLogin(login));
         System.out.println("Podaj hasło: ");
         String password = scanner.next();
-
-        userService.addNewUser(new User(name,surname,password,null,login));
+        User user = new User(name,surname,password,null,login);
+        userService.addNewUser(user);
+        CurrentUser = user;
         //User user = new User
 //        clientService.getClientByPESEL(pesel)
 //                .ifPresent(System.out::println);
@@ -74,7 +78,7 @@ public class LibraryTextView {
                 .anyMatch(s -> s.getLogin().equals(login));
     }
 
-    private static boolean operation3(){
+    private static boolean operation4(){
         UserService userService = new UserServiceImpl();
         User user=null;
         do {
