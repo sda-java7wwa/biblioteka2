@@ -10,6 +10,7 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
 
 
 
+
     @Override
     public List<Book> getBooks() {
         List<Book> bookList = new ArrayList<>();
@@ -20,10 +21,12 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
             in.close();
             fileIn.close();
         } catch (IOException i) {
-            i.printStackTrace();
+
+            System.out.println("Nie znaleziono");
+
         } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
-            c.printStackTrace();
+            System.out.println("Nie znaleziono");
+
         }
         return bookList;
     }
@@ -39,7 +42,7 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
             fileOut.close();
             System.out.printf("Serialized data is saved in books.ser");
         } catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("Błąd zapisu");
             return false;
         }
         return true;
