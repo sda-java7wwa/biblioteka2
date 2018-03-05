@@ -2,8 +2,13 @@ package UserDaoSerialLmpl;
 
 import library2.dao.BooksDaoSerialImpl;
 import library2.model.Book;
+import library2.model.User;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +25,6 @@ public class BooksDaoSerialImplTest {
         books.add(book);
         books.add(book2);
 
-        booksDaoSerial.saveBook(books);
+
     }
 }
