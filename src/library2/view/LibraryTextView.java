@@ -48,6 +48,12 @@ public class LibraryTextView {
                     System.out.println("Pomyślnie zalogowano");
                     break;
                 }
+
+                case DURING_REGISTRATION:{
+                    System.out.println("Rejestracja");
+                    state= handleDurningRegistration(scanner);
+                    break;
+                }
             }
         }
 
@@ -90,6 +96,14 @@ public class LibraryTextView {
             e.printStackTrace();
             return State.INIT;
         }
+    }
+
+    private static State handleDurningRegistration(Scanner scanner){
+
+        
+
+
+        return State.INIT;
     }
 }
 /*public class LibraryTextView {
