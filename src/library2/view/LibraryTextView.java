@@ -10,6 +10,7 @@ public class LibraryTextView {
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
+        System.out.println("test");
 
 
         UserService userService = new UserService() {
@@ -26,6 +27,7 @@ public class LibraryTextView {
             System.out.println("0. Zakończ");
             System.out.println("1. Dodaj użytkownika");
             System.out.println("2. Dodaj ksiazke");
+
             input = scanner.nextInt();
 
             switch (input){

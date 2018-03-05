@@ -8,12 +8,23 @@ public class User {
     private String surname;
     private String passwd;
     private List<Book> booklist;
+    private String login;
 
-    public User(String name, String surname, String passwd, List<Book> booklist) {
+    public User(String name, String surname, String passwd, List<Book> booklist, String login) {
         this.name = name;
         this.surname = surname;
         this.passwd = passwd;
         this.booklist = booklist;
+        this.login = login;
+
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Override
@@ -32,7 +43,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", passwd='" + passwd + '\'' + ", booklist=" + booklist + '}';
+        return "User{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", booklist=" + booklist + ", login='" + login + '\'' + '}';
     }
 
     public String getName() {
