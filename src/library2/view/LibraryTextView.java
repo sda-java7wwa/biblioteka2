@@ -36,7 +36,7 @@ public class LibraryTextView {
 
             switch (input){
                 case 0: System.exit(0);
-                case 1: //operation1(clientService); break;
+                case 1: operation1(userService); break;
                 case 2:// operation2(clientService);break;
                 default:
                     System.out.println("Niepoprawna operacja"); break;
