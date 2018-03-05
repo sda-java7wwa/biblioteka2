@@ -43,6 +43,11 @@ public class LibraryTextView {
                     state = handleDuringLogin(scanner);
                     break;
                 }
+
+                case LOGGED_IN:{
+                    System.out.println("Pomyślnie zalogowano");
+                    break;
+                }
             }
         }
 
