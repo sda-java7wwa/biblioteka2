@@ -13,6 +13,7 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 
     public void addUser(User user){
         this.users.add(user);
+        saveUser(users);
     }
 
     public List<User> getUsersList(){
