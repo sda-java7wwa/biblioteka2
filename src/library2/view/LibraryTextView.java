@@ -1,6 +1,7 @@
 package library2.view;
 
 import library2.Exceptions.InvalidLoginException;
+import library2.Exceptions.InvalidUserException;
 import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
 import library2.model.User;
@@ -10,7 +11,88 @@ import library2.service.UserServiceImpl;
 import java.util.Optional;
 import java.util.Scanner;
 
+
+
+
+import java.util.Scanner;
+
 public class LibraryTextView {
+    public enum State {
+        INIT,
+        DURING_LOGIN,
+        DURING_REGISTRATION,
+        LOGGED_IN,
+        STOP
+    }
+
+    private static User currentUser = null;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        State state = State.INIT;
+
+        while(state != State.STOP) {
+            switch (state) {
+                case INIT: {
+                    state = handleInit(scanner);
+                    break;
+                }
+
+                case DURING_LOGIN: {
+                    state = handleDuringLogin(scanner);
+                    break;
+                }
+
+                case LOGGED_IN:{
+                    System.out.println("Pomyślnie zalogowano");
+                    break;
+                }
+            }
+        }
+
+    }
+
+    private static State handleInit(Scanner scanner) {
+        System.out.println("Dzień dobry");
+        System.out.println("Co chcesz zrobić?");
+        System.out.println("1 - zalogować się");
+        System.out.println("2 - zarejestrować się");
+        System.out.println("3 - wyjść z programu");
+
+        int answer = scanner.nextInt();
+        switch (answer) {
+            case 1:
+                return State.DURING_LOGIN;
+            case 2:
+                return State.DURING_REGISTRATION;
+            case 3:
+                return State.STOP;
+            default:
+                System.out.println("Podano złą opcję");
+                return State.INIT;
+        }
+    }
+
+
+    private static State handleDuringLogin(Scanner scanner) {
+        System.out.println("Podaj login");
+        String username = scanner.nextLine();
+        System.out.println("Podaj hasło");
+        String password = scanner.nextLine();
+
+        UserService userService = new UserServiceImpl();
+
+        try {
+            currentUser = userService.logIn(username);
+            return State.LOGGED_IN;
+        } catch (InvalidLoginException e) {
+            e.printStackTrace();
+            return State.INIT;
+        }
+    }
+}
+/*public class LibraryTextView {
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -30,7 +112,8 @@ public class LibraryTextView {
             System.out.println("0. Zakończ");
             System.out.println("1. Dodaj użytkownika");
             System.out.println("2. Dodaj ksiazke");
-            System.out.println("3. Zaloguj się");
+            System.out.println("3. Pokaz kto jest zalogowany");
+            System.out.println("4. Zaloguj się");
 
             input = scanner.nextInt();
 
@@ -38,6 +121,8 @@ public class LibraryTextView {
                 case 0: System.exit(0);
                 case 1: operation1(userService); break;
                 case 2:// operation2(clientService);break;
+                case 3:
+                    System.out.println(CurrentUser.getLogin());
                 default:
                     System.out.println("Niepoprawna operacja"); break;
             }
@@ -60,8 +145,9 @@ public class LibraryTextView {
         }while (checkLogin(login));
         System.out.println("Podaj hasło: ");
         String password = scanner.next();
-
-        userService.addNewUser(new User(name,surname,password,null,login));
+        User user = new User(name,surname,password,null,login);
+        userService.addNewUser(user);
+        CurrentUser = user;
         //User user = new User
 //        clientService.getClientByPESEL(pesel)
 //                .ifPresent(System.out::println);
@@ -74,7 +160,7 @@ public class LibraryTextView {
                 .anyMatch(s -> s.getLogin().equals(login));
     }
 
-    private static boolean operation3(){
+    private static boolean operation4(){
         UserService userService = new UserServiceImpl();
         User user=null;
         do {
@@ -99,3 +185,4 @@ public class LibraryTextView {
         }
     }
 }
+*/
