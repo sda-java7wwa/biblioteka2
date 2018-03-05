@@ -1,5 +1,6 @@
 package library2.view;
 
+import library2.Exceptions.InvalidLoginException;
 import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
 import library2.model.User;
@@ -12,6 +13,9 @@ import java.util.Scanner;
 public class LibraryTextView {
 
     private static Scanner scanner = new Scanner(System.in);
+
+    private static User CurrentUser;
+
     public static void main(String[] args) {
 
         UserService userService = new UserServiceImpl();
@@ -72,12 +76,26 @@ public class LibraryTextView {
 
     private static boolean operation3(){
         UserService userService = new UserServiceImpl();
-        System.out.println("Podaj login: ");
-        String login = scanner.next();
-        Optional<User> user = userService.logIn(login);
-        user.map(s ->(User)s);
+        User user=null;
+        do {
+            System.out.println("Podaj login: ");
+            String login = scanner.next();
+            try {
+                user = userService.logIn(login);
+            } catch (InvalidLoginException e) {
+                System.out.println("Błędny login");
+                return false;
+            }
+        }while (user!=null);
+
         System.out.println("Podaj haslo: ");
         String password = scanner.next();
-        return true;
+        if(user.getPasswd().equals(password)){
+            CurrentUser = user;
+            return true;
+        } else {
+            System.out.println("Błędne hasło");
+            return false;
+        }
     }
 }

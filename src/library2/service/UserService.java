@@ -1,5 +1,6 @@
 package library2.service;
 
+import library2.Exceptions.InvalidLoginException;
 import library2.model.User;
 
 import java.util.Optional;
@@ -10,6 +11,6 @@ public interface UserService {
 
     boolean addNewUser(User user);
 
-    Optional<User> logIn(String login);
+    User logIn(String login) throws InvalidLoginException;
 
 }
