@@ -27,9 +27,7 @@ public class UserServiceImpl implements UserService{
 
         if(userDao.getUsersList()
                 .stream()
-                .filter(s -> s.getLogin().equals(login))
-                .findFirst()
-                .isPresent()){
+                .anyMatch(s -> s.getLogin().equals(login))){
            return userDao.getUsersList()
                     .stream()
                     .filter(s -> s.getLogin().equals(login))
