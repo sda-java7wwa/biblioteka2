@@ -93,7 +93,7 @@ public class LibraryTextView {
             currentUser = userService.logIn(username);
             return State.LOGGED_IN;
         } catch (InvalidLoginException e) {
-            e.printStackTrace();
+            System.out.println("Błędne logowanie. Spróbuj ponownie.");
             return State.INIT;
         }
     }
