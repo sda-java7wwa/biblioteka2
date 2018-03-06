@@ -6,13 +6,11 @@ import java.util.List;
 
 public interface UserDao {
 
-    void addUser(User user, String path);
+    void addUser(User user);
 
     List<User> getUsersList();
 
-    List<User> getUsersData (Path path);
+    List<User> getUsersData();
 
-    boolean saveUser(List<User> users, Path path);
-
-
+    boolean saveUser(List<User> users);
 }
