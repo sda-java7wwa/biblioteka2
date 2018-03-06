@@ -5,12 +5,14 @@ import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
 import library2.model.User;
 
+import java.io.File;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class UserServiceImpl implements UserService{
+    File file = new File("users.ser");
 
-    UserDao userDao = new UserDaoSerialImpl();
+    UserDao userDao = new UserDaoSerialImpl(file);
 
     @Override
     public User saveUserToList(String name, String surname, Scanner scanner) {
