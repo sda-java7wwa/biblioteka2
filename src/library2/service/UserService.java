@@ -4,10 +4,11 @@ import library2.Exceptions.InvalidLoginException;
 import library2.model.User;
 
 import java.util.Optional;
+import java.util.Scanner;
 
 public interface UserService {
 
-    boolean saveUserToList(User user);
+    User saveUserToList(String name, String surname, Scanner scanner);
 
     boolean addNewUser(User user);
 

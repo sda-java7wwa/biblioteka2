@@ -31,10 +31,10 @@ public class Main {
 //        userList.add(new User("bartek1","polak1","aaa1",null,"bbb1"));
 //        userList.add(new User("bartek2","polak2","aaa2",null,"bbb2"));
 //        userList.add(new User("bartek3","polak3","aaa3",null,"bbb3"));
-//
+
         UserDao userDao = new UserDaoSerialImpl();
-//
-//        userDao.saveUser(userList);
+
+ //       userDao.saveUser(userList);
 
         System.out.println(userDao.getUsersData());
     }
