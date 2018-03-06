@@ -21,11 +21,11 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
     }
 
     @Override
-    public List<User> getUsersData() {
+    public List<User> getUsersData() {// TODO konstruktor x nszwa pliku
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("users.ser"))){
             users = (List<User>) in.readObject();
         } catch (IOException i) {
-            System.out.println("Błąd odczytu pliku");
+            System.out.println("Błąd odczytu pliku");// TODO log i wiadomośc dla usera system.err
             return null;
         } catch (ClassNotFoundException c) {
             System.out.println("Nie znaleziono klasy");
