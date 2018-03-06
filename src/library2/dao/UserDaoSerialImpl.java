@@ -17,6 +17,7 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
     }
 
     public List<User> getUsersList(){
+        users = getUsersData();
         return users;
     }
 
