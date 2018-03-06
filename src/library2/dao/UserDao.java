@@ -10,7 +10,8 @@ public interface UserDao {
 
     List<User> getUsersList();
 
-    List<User> getUsersData();
+    List<User> getUsersData ();
 
     boolean saveUser(List<User> users);
+
 }
