@@ -12,8 +12,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 
-
-
 import java.util.Scanner;
 
 public class LibraryTextView {
@@ -32,7 +30,7 @@ public class LibraryTextView {
 
         State state = State.INIT;
 
-        while(state != State.STOP) {
+        while (state != State.STOP) {
             switch (state) {
                 case INIT: {
                     state = handleInit(scanner);
@@ -44,15 +42,15 @@ public class LibraryTextView {
                     break;
                 }
 
-                case LOGGED_IN:{
+                case LOGGED_IN: {
                     System.out.println("Pomyślnie zalogowano");
                     state = handleLoggedIn(scanner);
                     break;
                 }
 
-                case DURING_REGISTRATION:{
+                case DURING_REGISTRATION: {
                     System.out.println("Rejestracja");
-                    state= handleDurningRegistration(scanner);
+                    state = handleDurningRegistration(scanner);
                     break;
                 }
             }
@@ -84,9 +82,9 @@ public class LibraryTextView {
 
     private static State handleDuringLogin(Scanner scanner) {
         System.out.println("Podaj login");
-        String username = scanner.nextLine();
+        String username = scanner.next();
         System.out.println("Podaj hasło");
-        String password = scanner.nextLine();
+        String password = scanner.next();
 
         UserService userService = new UserServiceImpl();
 
@@ -99,7 +97,7 @@ public class LibraryTextView {
         }
     }
 
-    private static State handleDurningRegistration(Scanner scanner){
+    private static State handleDurningRegistration(Scanner scanner) {
         System.out.println("Podaj Imie: ");
         String name = scanner.next();
         System.out.println("Podaj nazwisko: ");
@@ -111,11 +109,31 @@ public class LibraryTextView {
         return State.LOGGED_IN;
     }
 
-    private static State handleLoggedIn(Scanner scanner){
-        return null;
+    private static State handleLoggedIn(Scanner scanner) {
+        System.out.println("Co chcesz zrobić?");
+        System.out.println("1. Wypożycz książkę");
+        System.out.println("2. Sprawdź konto");
+        System.out.println("3. Wyloguj");
+
+        int answer = scanner.nextInt();
+        switch (answer) {
+            case 1:
+
+                return State.LOGGED_IN;
+            case 2:
+                return State.LOGGED_IN;
+            case 3:
+                currentUser = null;
+                return State.INIT;
+            default:
+                System.out.println("Podano złą opcję");
+                return State.LOGGED_IN;
+
+
+        }
+
+
     }
-
-
 }
 /*public class LibraryTextView {
 
