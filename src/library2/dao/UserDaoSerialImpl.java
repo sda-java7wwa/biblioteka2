@@ -13,6 +13,7 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 
     public void addUser(User user){
         this.users.add(user);
+        saveUser(users);
     }
 
     public List<User> getUsersList(){
@@ -21,17 +22,14 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 
     @Override
     public List<User> getUsersData() {
-        try {
-            FileInputStream fileIn = new FileInputStream("users.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("users.ser"))){
             users = (List<User>) in.readObject();
-            in.close();
-            fileIn.close();
         } catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("Błąd odczytu pliku");
+            return null;
         } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
-            c.printStackTrace();
+            System.out.println("Nie znaleziono klasy");
+            return null;
         }
         return users;
     }
@@ -41,19 +39,13 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
     @Override
     public boolean saveUser(List<User> users) {
 
-        try {
-            FileOutputStream fileOut =
-                    new FileOutputStream("users.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("users.ser"))){
             out.writeObject(users);
-            out.close();
-            fileOut.close();
-            System.out.printf("Serialized data is saved in users.ser");
+            System.out.printf("Serializacja listy userow do pliku");
         } catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("Błąd zapisu userow");
             return false;
         }
-
         return true;
     }
 }

@@ -13,8 +13,7 @@ import java.util.List;
 public class UserDaoSerialImplTest {
 
 
-
-static UserDaoSerialImpl userDao = new UserDaoSerialImpl();
+UserDaoSerialImpl userDao = new UserDaoSerialImpl();
 
 
 

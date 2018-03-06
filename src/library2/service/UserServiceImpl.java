@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean addNewUser(User user) {
         userDao.addUser(user);
-        return false;
+        return true;
     }
 
     @Override
@@ -27,9 +27,7 @@ public class UserServiceImpl implements UserService{
 
         if(userDao.getUsersList()
                 .stream()
-                .filter(s -> s.getLogin().equals(login))
-                .findFirst()
-                .isPresent()){
+                .anyMatch(s -> s.getLogin().equals(login))){
            return userDao.getUsersList()
                     .stream()
                     .filter(s -> s.getLogin().equals(login))
