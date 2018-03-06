@@ -13,7 +13,7 @@ import java.util.List;
 public class UserDaoSerialImplTest {
 
 
-UserDaoSerialImpl userDao = new UserDaoSerialImpl();
+UserDaoSerialImpl userDao = new UserDaoSerialImpl();//TODO new user W @BEfore
 
 
 
@@ -35,6 +35,6 @@ UserDaoSerialImpl userDao = new UserDaoSerialImpl();
     List<User> list = userDao.getUsersList();
 
     Assert.assertEquals(2,list.size());
-    Assert.assertEquals(list.get(1), new User("Zbigniew", "Stonoga", "tablica", null, "Małysz"));
+  //  Assert.assertEquals(list.get(1), new User("Zbigniew", "Stonoga", "tablica", null, "Małysz"));
 }
 }

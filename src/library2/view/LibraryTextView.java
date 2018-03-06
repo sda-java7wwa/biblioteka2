@@ -104,7 +104,7 @@ public class LibraryTextView {
         System.out.println("Podaj nazwisko: ");
         String surname = scanner.next();
         String login=null;
-        do{
+        do{// TODO oddzielienie logiki
             if(login!=null){
                 System.out.println("Login znajduje się już w systemie!");
             }
