@@ -9,38 +9,25 @@ import java.util.List;
 public class BooksDaoSerialImpl implements BookDao, Serializable {
 
 
-
-
     @Override
     public List<Book> getBooks() {
         List<Book> bookList = new ArrayList<>();
-        try {
-            FileInputStream fileIn = new FileInputStream("books.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("books.ser"))){
             bookList = (List<Book>) in.readObject();
-            in.close();
-            fileIn.close();
+            System.out.println("Deserializacja listy książek z pliku");
         } catch (IOException i) {
-
-            System.out.println("Nie znaleziono");
-
+            System.out.println("Błąd odczytu");
         } catch (ClassNotFoundException c) {
-            System.out.println("Nie znaleziono");
-
+            System.out.println("Nie znaleziono klasy");
         }
         return bookList;
     }
 
     @Override
     public boolean saveBook(List<Book> books) {
-        try {
-            FileOutputStream fileOut =
-                    new FileOutputStream("books.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("books.ser"))) {
             out.writeObject(books);
-            out.close();
-            fileOut.close();
-            System.out.printf("Serialized data is saved in books.ser");
+            System.out.println("Lista ksiażek zserializowana do pliku");
         } catch (IOException i) {
             System.out.println("Błąd zapisu");
             return false;
