@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BooksDaoSerialImplTest {
 
-    public BooksDaoSerialImpl booksDaoSerial = new BooksDaoSerialImpl();
+    public BooksDaoSerialImpl booksDaoSerial = new BooksDaoSerialImpl("booksTest.ser");
 
     @Test
     public void BooksDaoTest () {
