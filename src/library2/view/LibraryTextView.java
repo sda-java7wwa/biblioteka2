@@ -46,6 +46,7 @@ public class LibraryTextView {
 
                 case LOGGED_IN:{
                     System.out.println("Pomyślnie zalogowano");
+                    state = handleLoggedIn(scanner);
                     break;
                 }
 
@@ -103,29 +104,18 @@ public class LibraryTextView {
         String name = scanner.next();
         System.out.println("Podaj nazwisko: ");
         String surname = scanner.next();
-        String login=null;
-        do{// TODO oddzielienie logiki
-            if(login!=null){
-                System.out.println("Login znajduje się już w systemie!");
-            }
-            System.out.println("Podaj login: ");
-            login = scanner.next();
-        }while (checkLogin(login));
-        System.out.println("Podaj hasło: ");
-        String password = scanner.next();
-        User user = new User(name,surname,password,null,login);
-        UserService userService = new UserServiceImpl();
-        userService.addNewUser(user);
-        currentUser = user;
+        UserServiceImpl userService = new UserServiceImpl();
+
+
+        currentUser = userService.saveUserToList(name, surname, scanner);
         return State.LOGGED_IN;
     }
 
-    private static boolean checkLogin(String login){
-        UserDao userDao = new UserDaoSerialImpl();
-        return userDao.getUsersList()
-                .stream()
-                .anyMatch(s -> s.getLogin().equals(login));
+    private static State handleLoggedIn(Scanner scanner){
+        return null;
     }
+
+
 }
 /*public class LibraryTextView {
 
