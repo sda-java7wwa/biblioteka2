@@ -11,7 +11,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getBooksList() {
 
-        BooksDaoSerialImpl booksDaoSerial = new BooksDaoSerialImpl();
+        BooksDaoSerialImpl booksDaoSerial = new BooksDaoSerialImpl("books.ser");
 
         return booksDaoSerial.getBooks();
     }

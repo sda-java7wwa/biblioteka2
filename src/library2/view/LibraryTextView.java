@@ -4,10 +4,14 @@ import library2.Exceptions.InvalidLoginException;
 import library2.Exceptions.InvalidUserException;
 import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
+import library2.model.Book;
 import library2.model.User;
+import library2.service.BookService;
+import library2.service.BookServiceImpl;
 import library2.service.UserService;
 import library2.service.UserServiceImpl;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -118,7 +122,7 @@ public class LibraryTextView {
         int answer = scanner.nextInt();
         switch (answer) {
             case 1:
-
+                System.out.println(handleShowBooks());
                 return State.LOGGED_IN;
             case 2:
                 return State.LOGGED_IN;
@@ -133,6 +137,11 @@ public class LibraryTextView {
         }
 
 
+    }
+
+    private static List<Book> handleShowBooks(){
+        BookService bookService = new BookServiceImpl();
+        return bookService.getBooksList();
     }
 }
 /*public class LibraryTextView {
