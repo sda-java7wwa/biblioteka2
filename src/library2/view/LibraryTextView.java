@@ -99,11 +99,32 @@ public class LibraryTextView {
     }
 
     private static State handleDurningRegistration(Scanner scanner){
+        System.out.println("Podaj Imie: ");
+        String name = scanner.next();
+        System.out.println("Podaj nazwisko: ");
+        String surname = scanner.next();
+        String login=null;
+        do{
+            if(login!=null){
+                System.out.println("Login znajduje się już w systemie!");
+            }
+            System.out.println("Podaj login: ");
+            login = scanner.next();
+        }while (checkLogin(login));
+        System.out.println("Podaj hasło: ");
+        String password = scanner.next();
+        User user = new User(name,surname,password,null,login);
+        UserService userService = new UserServiceImpl();
+        userService.addNewUser(user);
+        currentUser = user;
+        return State.LOGGED_IN;
+    }
 
-
-
-
-        return State.INIT;
+    private static boolean checkLogin(String login){
+        UserDao userDao = new UserDaoSerialImpl();
+        return userDao.getUsersList()
+                .stream()
+                .anyMatch(s -> s.getLogin().equals(login));
     }
 }
 /*public class LibraryTextView {
