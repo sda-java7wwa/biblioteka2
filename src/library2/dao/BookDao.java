@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookDao {
 
-    List<Category> getBooks();
+    Category getBooks();
 
-    boolean saveBook(List<Category> books);
+    boolean saveBook(Category main);
 }

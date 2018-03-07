@@ -11,6 +11,8 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
 
     private List<Category> categoryList;
 
+    private Category main;
+
     private String path;
 
     public BooksDaoSerialImpl(String path){
@@ -22,22 +24,22 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
     }
 
     @Override
-    public List<Category> getBooks() {
+    public Category getBooks() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(getPath()))){
-            categoryList = (List<Category>) in.readObject();
+            main = (Category) in.readObject();
             System.out.println("Deserializacja listy książek z pliku");
         } catch (IOException i) {
             System.out.println("Błąd odczytu");
         } catch (ClassNotFoundException c) {
             System.out.println("Nie znaleziono klasy");
         }
-        return categoryList;
+        return main;
     }
 
     @Override
-    public boolean saveBook(List<Category> books) {
+    public boolean saveBook(Category main) {
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(getPath()))) {
-            out.writeObject(books);
+            out.writeObject(main);
             System.out.println("Lista ksiażek zserializowana do pliku");
         } catch (IOException i) {
             System.out.println("Błąd zapisu");
