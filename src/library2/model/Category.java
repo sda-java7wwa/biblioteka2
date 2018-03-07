@@ -45,10 +45,9 @@ public class Category implements Serializable{
 
     @Override
     public String toString() {
-        return "\n"+"Category{" +
-                "name='" + name + '\'' +
-                ", bookList=" + bookList +
-                ", subcategory=" + getSubcategory() +
-                '}';
+        return "\n" +
+                "Kategoria : " + name  +
+                " \n\t\t Lista książek : " + bookList +
+                " \n\t Podkategoria :" + getSubcategory();
     }
 }
