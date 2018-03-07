@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class UserServiceImpl implements UserService{
     File file = new File("users.ser");
 
-    UserDao userDao = new UserDaoSerialImpl(file);
+    UserDao userDao = new UserDaoSerialImpl("users.ser");
 
     @Override
     public User saveUserToList(String name, String surname, Scanner scanner) {
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
     }
 
     private static boolean checkLogin(String login){
-        UserDao userDao = new UserDaoSerialImpl();
+        UserDao userDao = new UserDaoSerialImpl("users.ser");
         return userDao.getUsersList()
                 .stream()
                 .anyMatch(s -> s.getLogin().equals(login));

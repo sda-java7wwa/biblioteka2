@@ -108,7 +108,6 @@ public class LibraryTextView {
         String surname = scanner.next();
         UserServiceImpl userService = new UserServiceImpl();
 
-
         currentUser = userService.saveUserToList(name, surname, scanner);
         return State.LOGGED_IN;
     }
