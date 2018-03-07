@@ -116,7 +116,8 @@ public class LibraryTextView {
         System.out.println("Co chcesz zrobić?");
         System.out.println("1. Wypożycz książkę");
         System.out.println("2. Sprawdź konto");
-        System.out.println("3. Wyloguj");
+        System.out.println("3. Dodaj książkę");
+        System.out.println("0. Wyloguj");
 
         int answer = scanner.nextInt();
         switch (answer) {
@@ -125,9 +126,12 @@ public class LibraryTextView {
                 return State.LOGGED_IN;
             case 2:
                 return State.LOGGED_IN;
-            case 3:
+            case 0:
                 currentUser = null;
                 return State.INIT;
+            case 3:
+
+                return State.LOGGED_IN;
             default:
                 System.out.println("Podano złą opcję");
                 return State.LOGGED_IN;
