@@ -150,7 +150,7 @@ public class LibraryTextView {
     private static State handleLoggedIn(Scanner scanner) {
         System.out.println("Co chcesz zrobić?");
         System.out.println("1. Wyświetl wszystkie książki");
-        System.out.println("2. Sprawdź konto");
+        System.out.println("2. Wypożycz książkę");
         System.out.println("3. Dodaj książkę");
         System.out.println("0. Wyloguj");
 
@@ -160,6 +160,7 @@ public class LibraryTextView {
                 System.out.println(handleShowBooks());
                 return State.LOGGED_IN;
             case 2:
+                handleBookBorrow(currentUser,scanner);
                 return State.LOGGED_IN;
             case 0:
                 currentUser = null;
@@ -173,6 +174,15 @@ public class LibraryTextView {
 
         }
 
+
+    }
+
+    private static void handleBookBorrow(User user,Scanner scanner){
+        System.out.println("Podaj ID książki:");
+        int id = scanner.nextInt();
+        BookService bookService = new BookServiceImpl();
+
+        bookService.borrowBook(id,user);
 
     }
 

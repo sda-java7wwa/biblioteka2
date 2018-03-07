@@ -9,6 +9,10 @@ public class Category implements Serializable{
     private List<Category> subcategory;
     private List<Book> bookList;
 
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
     public Category(String name) {
         this.name = name;
     }
