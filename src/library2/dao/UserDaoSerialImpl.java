@@ -10,14 +10,21 @@ import java.util.List;
 
 public class UserDaoSerialImpl implements UserDao, Serializable{
 
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
+    private String path;
 
-    public void addUser(User user, String path){
+    public UserDaoSerialImpl(String path){
+        this.path=path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void addUser(User user){
         this.users.add(user);
-        saveUser(users, Paths.get(path));
-
-
+        saveUser(users);
     }
 
     public List<User> getUsersList(){
@@ -28,8 +35,8 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 //private static final Path path = Paths.get(FILE_NAME);
 
     @Override
-    public List<User> getUsersData(Path path) {// TODO konstruktor x nszwa pliku
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(String.valueOf(path)))){
+    public List<User> getUsersData() {// TODO konstruktor x nszwa pliku
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(getPath()))){
             users = (List<User>) in.readObject();
         } catch (IOException i) {
            // System.err
@@ -45,9 +52,9 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 
 
     @Override
-    public boolean saveUser(List<User> users, Path path) {
+    public boolean saveUser(List<User> users) {
 
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(String.valueOf(path)))){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(getPath()))){
             out.writeObject(users);
             System.out.printf("Serializacja listy userow do pliku");
         } catch (IOException i) {
