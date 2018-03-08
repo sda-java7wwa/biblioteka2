@@ -12,18 +12,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void borrowBook(int id, User user) {
-        if(getBooksList().getBookList().stream()
-                .anyMatch(s-> s.getId()==id)){
-           Book book = getBooksList().getBookList().stream()
-                    .filter(s->s.getId()==id)
-                    .findFirst()
-                    .get();
-           book.setBookUser(user);
-        } else {
+        BookDao bookDao = new BooksDaoSerialImpl("books.ser");
 
-        }
+        List<Category> categoryList = bookDao.getBooks().getSubcategory();
 
+        checkBooks(id,categoryList,user);
 //        user.getBooklist().add()
+    }
+
+    private void checkBooks(int id,List<Category> categoryList,User user){
+        for(Category category:categoryList){
+            List<Book> bookList = category.getBookList();
+            for(Book book:bookList){
+                if(book.getId()==id){
+                    book.setBookUser(user);
+                }
+            }
+        }
     }
 
     @Override
