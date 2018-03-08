@@ -1,5 +1,6 @@
 package com.company;
 
+import library2.dao.BookDaoFileImpl;
 import library2.dao.BooksDaoSerialImpl;
 import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
@@ -15,12 +16,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Category main = new Category("Główna");
+        Category mainn = new Category("Główna");
          Category poradniki = new Category("Poradniki");
           Category biznesowe = new Category("Biznesowe");
           Category kulinarne = new Category("kulinarne");
 
-        main.addToList(poradniki);
+        mainn.addToList(poradniki);
         poradniki.addToList(biznesowe);
 
         biznesowe.addToList(new Book("Sienkiewicz","Ogniem i Mieczem",1920,1));
@@ -40,15 +41,23 @@ public class Main {
 
         //System.out.println(main.getBookList());
         //System.out.println(main.getSubcategory());
-        System.out.println("size of sub: "+ main.getSubcategory().get(0).getNazwa());
-        System.out.println(main.getSubcategory().get(0).getSubcategory().get(0).getNazwa());
+        //System.out.println("size of sub: "+ main.getSubcategory().get(0).getNazwa());
+        //System.out.println(main.getSubcategory().get(0).getSubcategory().get(0).getNazwa());
 
-
-        System.out.println(main);
+//        System.out.println(main);
+//
+//        BookDaoFileImpl bdfi = new BookDaoFileImpl();
+//        bdfi.initFileToSave();
+//        bdfi.saveBookToFile(new Book("AAAA","Pomidorowa",2019,6));
+//        bdfi.saveBookToFile(new Book("BBBB","Pomidorowa",2019,7));
+//        bdfi.saveBookToFile(new Book("CCC","Pomidorowa",2019,6));
+//        System.out.println(main);
 
         CategoryService categoryService = new CategoryService();
 
-        categoryService.getBokList(main);
+        //List<Category> lista = categoryService.getAllBooks(mainn);
+        System.out.println(categoryService.getAllBooks(mainn).size());
+        System.out.println(categoryService.getAllBooks(mainn).get(0));
 
 
 

@@ -3,8 +3,11 @@ package library2.dao;
 import library2.model.Book;
 import library2.model.Category;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class BookDaoFileImpl implements BookDao {
 
@@ -23,8 +26,30 @@ public class BookDaoFileImpl implements BookDao {
 
     @Override
     public boolean saveBook(Category main) {
-        return false;
+
+        return true;
     }
+
+
+    public boolean saveBookToFile(Book book){
+        try {
+
+            Files.write(PATH, getBookAsString(book).getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public void initFileToSave(){
+        try {
+            Files.write(PATH, constructFirstRowOfText().getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private String getBookAsString(Book book){
 
@@ -42,8 +67,11 @@ public class BookDaoFileImpl implements BookDao {
     }
 
     private String constructFirstRowOfText(){
+        System.out.println("działą??");
         StringBuilder sb = new StringBuilder();
         sb.append(CATEGORYNAME).append(DELIMITER).append(BOOKNAME).append(DELIMITER)
-                .append(AUTHORNAME).append(DELIMITER).append(YEAR).append(DELIMITER).append(BOOKID);
+                .append(AUTHORNAME).append(DELIMITER).append(YEAR).append(DELIMITER).append(BOOKID).append("\n");
+
+        return sb.toString();
     }
 }
