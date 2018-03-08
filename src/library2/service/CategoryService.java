@@ -51,7 +51,7 @@ public class CategoryService {
             } else if (categories.get(i).getSubcategory() == null){
                 break;
             } else {
-                getBokList(categories.get(i));
+                getAllBooks(categories.get(i));
             }
             }
 
