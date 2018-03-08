@@ -15,13 +15,11 @@ public class Main {
     public static void main(String[] args) {
 
         Category main = new Category("Główna");
-
-        Category poradniki = new Category("Poradniki");
+         Category poradniki = new Category("Poradniki");
+          Category biznesowe = new Category("Biznesowe");
+          Category kulinarne = new Category("kulinarne");
 
         main.addToList(poradniki);
-
-        Category biznesowe = new Category("Biznesowe");
-
         poradniki.addToList(biznesowe);
 
         biznesowe.addToList(new Book("Sienkiewicz","Ogniem i Mieczem",1920,1));
@@ -31,7 +29,7 @@ public class Main {
         poradniki.addToList(new Book("poradnik1","tytul",1999,4));
         poradniki.addToList(new Book("poradnik2","tytul",1999,5));
 
-        Category kulinarne = new Category("kulinarne");
+
 
         poradniki.addToList(kulinarne);
 
@@ -39,7 +37,13 @@ public class Main {
         kulinarne.addToList(new Book("Okrasa2","Pomidorowa",2019,7));
         kulinarne.addToList(new Book("Paskal","Rosół",2019,8));
 
-        System.out.println(main);
+        //System.out.println(main.getBookList());
+        //System.out.println(main.getSubcategory());
+        System.out.println("size of sub: "+ main.getSubcategory().get(0).getNazwa());
+        System.out.println(main.getSubcategory().get(0).getSubcategory().get(0).getNazwa());
+
+
+        //System.out.println(main);
 
 
 
