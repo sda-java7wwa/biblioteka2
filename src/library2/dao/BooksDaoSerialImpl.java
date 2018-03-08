@@ -15,6 +15,10 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
 
     private String path;
 
+    public Category getMain() {
+        return main;
+    }
+
     public BooksDaoSerialImpl(String path){
         this.path=path;
     }

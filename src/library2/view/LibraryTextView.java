@@ -14,6 +14,9 @@ import library2.service.BookServiceImpl;
 import library2.service.UserService;
 import library2.service.UserServiceImpl;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -61,7 +64,10 @@ public class LibraryTextView {
 
         BookDao bookDao = new BooksDaoSerialImpl("books.ser");
 
-        bookDao.saveBook(main);
+
+        if(Files.exists(Paths.get("books.ser"))){
+            bookDao.saveBook(main);
+        }
 
 
 

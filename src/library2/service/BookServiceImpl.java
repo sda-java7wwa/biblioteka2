@@ -12,12 +12,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void borrowBook(int id, User user) {
-        BookDao bookDao = new BooksDaoSerialImpl("books.ser");
+        BooksDaoSerialImpl bookDao = new BooksDaoSerialImpl("books.ser");
 
         List<Category> categoryList = bookDao.getBooks().getSubcategory();
 
         checkBooks(id,categoryList,user);
-//        user.getBooklist().add()
+        bookDao.saveBook(bookDao.getMain());
     }
 
     private void checkBooks(int id,List<Category> categoryList,User user){
@@ -27,7 +27,7 @@ public class BookServiceImpl implements BookService {
                 if(book.getId()==id){
                     book.setBookUser(user);
                     user.getBooklist().add(book);
-                    System.out.println("Znalazlem ksiazke!"+user+" " + book);
+                    System.out.println(user+"\n"+ book);
                 }
             }
             checkBooks(id,category.getSubcategory(),user);
