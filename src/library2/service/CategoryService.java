@@ -3,6 +3,8 @@ package library2.service;
 import library2.model.Book;
 import library2.model.Category;
 
+import javax.swing.text.html.HTMLDocument;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,6 +37,26 @@ public class CategoryService {
 
 
         return;
+    }
+
+
+    public List<Category> getAllBooks (Category main){
+
+        List<Category> categories = main.getSubcategory();
+        List<Category> withBooks = new ArrayList<>();
+
+        for (int i = 0; i < categories.size(); i++){
+            if (categories.get(i).getBookList() != null){
+                withBooks.add(categories.get(i));
+            } else if (categories.get(i).getSubcategory() == null){
+                break;
+            } else {
+                getBokList(categories.get(i));
+            }
+            }
+
+
+        return withBooks;
     }
 
 }
