@@ -1,11 +1,15 @@
 package library2.service;
 
 import library2.model.Book;
+import library2.model.Category;
+import library2.model.User;
 
 import java.util.List;
 
 public interface BookService {
 
-    List<Book> getBooksList();
+    void borrowBook(int id, User user);
+
+    Category getBooksList();
 
 }

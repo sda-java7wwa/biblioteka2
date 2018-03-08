@@ -2,9 +2,12 @@ package library2.view;
 
 import library2.Exceptions.InvalidLoginException;
 import library2.Exceptions.InvalidUserException;
+import library2.dao.BookDao;
+import library2.dao.BooksDaoSerialImpl;
 import library2.dao.UserDao;
 import library2.dao.UserDaoSerialImpl;
 import library2.model.Book;
+import library2.model.Category;
 import library2.model.User;
 import library2.service.BookService;
 import library2.service.BookServiceImpl;
@@ -30,6 +33,38 @@ public class LibraryTextView {
     private static User currentUser = null;
 
     public static void main(String[] args) {
+
+        Category main = new Category("Główna");
+
+        Category poradniki = new Category("Poradniki");
+
+        main.addToList(poradniki);
+
+        Category biznesowe = new Category("Biznesowe");
+
+        poradniki.addToList(biznesowe);
+
+        biznesowe.addToList(new Book("Sienkiewicz","Ogniem i Mieczem",1920,1));
+        biznesowe.addToList(new Book("Sienkiewicz1","Ogniem i Mieczem",1920,2));
+        biznesowe.addToList(new Book("Sienkiewicz2","Ogniem i Mieczem",1920,3));
+
+        poradniki.addToList(new Book("poradnik1","tytul",1999,4));
+        poradniki.addToList(new Book("poradnik2","tytul",1999,5));
+
+        Category kulinarne = new Category("kulinarne");
+
+        poradniki.addToList(kulinarne);
+
+        kulinarne.addToList(new Book("Okrasa","Pomidorowa",2019,6));
+        kulinarne.addToList(new Book("Okrasa2","Pomidorowa",2019,7));
+        kulinarne.addToList(new Book("Paskal","Rosół",2019,8));
+
+        BookDao bookDao = new BooksDaoSerialImpl("books.ser");
+
+        bookDao.saveBook(main);
+
+
+
         Scanner scanner = new Scanner(System.in);
 
         State state = State.INIT;
@@ -114,9 +149,10 @@ public class LibraryTextView {
 
     private static State handleLoggedIn(Scanner scanner) {
         System.out.println("Co chcesz zrobić?");
-        System.out.println("1. Wypożycz książkę");
-        System.out.println("2. Sprawdź konto");
-        System.out.println("3. Wyloguj");
+        System.out.println("1. Wyświetl wszystkie książki");
+        System.out.println("2. Wypożycz książkę");
+        System.out.println("3. Dodaj książkę");
+        System.out.println("0. Wyloguj");
 
         int answer = scanner.nextInt();
         switch (answer) {
@@ -124,10 +160,13 @@ public class LibraryTextView {
                 System.out.println(handleShowBooks());
                 return State.LOGGED_IN;
             case 2:
+                handleBookBorrow(currentUser,scanner);
                 return State.LOGGED_IN;
-            case 3:
+            case 0:
                 currentUser = null;
                 return State.INIT;
+            case 3:
+                return State.LOGGED_IN;
             default:
                 System.out.println("Podano złą opcję");
                 return State.LOGGED_IN;
@@ -138,7 +177,16 @@ public class LibraryTextView {
 
     }
 
-    private static List<Book> handleShowBooks(){
+    private static void handleBookBorrow(User user,Scanner scanner){
+        System.out.println("Podaj ID książki:");
+        int id = scanner.nextInt();
+        BookService bookService = new BookServiceImpl();
+
+        bookService.borrowBook(id,user);
+
+    }
+
+    private static Category handleShowBooks(){
         BookService bookService = new BookServiceImpl();
         return bookService.getBooksList();
     }

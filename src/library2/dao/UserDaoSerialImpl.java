@@ -23,6 +23,7 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
     }
 
     public void addUser(User user){
+        users = getUsersData();
         users.add(user);
         saveUser(users);
     }
@@ -35,7 +36,7 @@ public class UserDaoSerialImpl implements UserDao, Serializable{
 //private static final Path path = Paths.get(FILE_NAME);
 
     @Override
-    public List<User> getUsersData() {// TODO konstruktor x nszwa pliku
+    public List<User> getUsersData() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(getPath()))){
             users = (List<User>) in.readObject();
         } catch (IOException i) {

@@ -23,7 +23,7 @@ public class UserDaoSerialImplTest {
 
 @Before
     public void  getUserDao() {
-        userDao = new UserDaoSerialImpl(new File("DataTest.txt"));
+        userDao = new UserDaoSerialImpl("users.ser");
 
 
     return ;

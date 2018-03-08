@@ -1,6 +1,7 @@
 package library2.dao;
 
 import library2.model.Book;
+import library2.model.Category;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,7 +9,9 @@ import java.util.List;
 
 public class BooksDaoSerialImpl implements BookDao, Serializable {
 
-    private List<Book> bookList;
+    private List<Category> categoryList;
+
+    private Category main;
 
     private String path;
 
@@ -21,22 +24,22 @@ public class BooksDaoSerialImpl implements BookDao, Serializable {
     }
 
     @Override
-    public List<Book> getBooks() {
+    public Category getBooks() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(getPath()))){
-            bookList = (List<Book>) in.readObject();
+            main = (Category) in.readObject();
             System.out.println("Deserializacja listy książek z pliku");
         } catch (IOException i) {
             System.out.println("Błąd odczytu");
         } catch (ClassNotFoundException c) {
             System.out.println("Nie znaleziono klasy");
         }
-        return bookList;
+        return main;
     }
 
     @Override
-    public boolean saveBook(List<Book> books) {
+    public boolean saveBook(Category main) {
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(getPath()))) {
-            out.writeObject(books);
+            out.writeObject(main);
             System.out.println("Lista ksiażek zserializowana do pliku");
         } catch (IOException i) {
             System.out.println("Błąd zapisu");

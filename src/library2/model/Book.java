@@ -43,13 +43,20 @@ public class Book implements Serializable{
 
     @Override
     public String toString() {
-        return "\n"+"Book{" +
-                "author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", year=" + year +
-                ", id=" + id +
-                ", bookUser=" + bookUser +
-                '}';
+        if(bookUser!=null){
+            return "\n\t\t\t" +
+                    " " + author +
+                    " '" + title +
+                    "' rok wydania: " + year +
+                    " nr ID: " + id + " Niedostępna";
+        } else {
+            return "\n\t\t\t" +
+                    " " + author +
+                    " '" + title +
+                    "' rok wydania: " + year +
+                    " nr ID: " + id ;
+        }
+
     }
 
     @Override
