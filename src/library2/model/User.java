@@ -1,6 +1,7 @@
 package library2.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,6 +73,9 @@ public class User implements Serializable{
     }
 
     public List<Book> getBooklist() {
+        if(booklist==null){
+            booklist= new ArrayList<>();
+        }
         return booklist;
     }
 

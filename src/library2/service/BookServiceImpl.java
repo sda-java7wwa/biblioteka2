@@ -26,8 +26,11 @@ public class BookServiceImpl implements BookService {
             for(Book book:bookList){
                 if(book.getId()==id){
                     book.setBookUser(user);
+                    user.getBooklist().add(book);
+                    System.out.println("Znalazlem ksiazke!"+user+" " + book);
                 }
             }
+            checkBooks(id,category.getSubcategory(),user);
         }
     }
 

@@ -6,6 +6,7 @@ import library2.dao.UserDaoSerialImpl;
 import library2.model.Book;
 import library2.model.Category;
 import library2.model.User;
+import library2.service.CategoryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,11 @@ public class Main {
         System.out.println(main.getSubcategory().get(0).getSubcategory().get(0).getNazwa());
 
 
-        //System.out.println(main);
+        System.out.println(main);
+
+        CategoryService categoryService = new CategoryService();
+
+        categoryService.getBokList(main);
 
 
 

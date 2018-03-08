@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Category implements Serializable{
     private String name;
-    private List<Category> subcategory;
-    private List<Book> bookList;
+    private List<Category> subcategory=new ArrayList<>();
+    private List<Book> bookList=new ArrayList<>();
 
     public List<Book> getBookList() {
         return bookList;

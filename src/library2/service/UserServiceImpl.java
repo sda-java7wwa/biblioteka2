@@ -6,6 +6,7 @@ import library2.dao.UserDaoSerialImpl;
 import library2.model.User;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService{
         }while (checkLogin(login));
         System.out.println("Podaj hasło: ");
         String password = scanner.next();
-        User user = new User(name,surname,password,null,login);
+        User user = new User(name,surname,password,new ArrayList<>(),login);
         UserService userService = new UserServiceImpl();
         userService.addNewUser(user);
 
